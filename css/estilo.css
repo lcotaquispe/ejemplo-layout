@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: sans-serif;
+    padding-top: 50px;
+}
+.articulos{
+    width: 90%;
+    margin:0 auto 50px; /* le gusta separar los elementos con margin-top*/
+}
+/* si tienes el ancho en pixeles, al activar scroll probablemente te salga la barra horizontal también*/
+.card_img{
+    display: block; /* siempre para las imágenes, para evitar que se comporten como palabras*/
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    /* la IMG se comporta como un contenedor con una imagen dentro */height: 150px;
+    object-fit: cover; /* se puede lograr el mismo efecto con background-image pero esto no es una imagen de fondo sino una imagen de contenido */
+    object-position: bottom;
+}
+.card_contenido{
+    padding: 10px 20px 20px;
+    border-top: 5px solid gray;
+    border-left: 1px solid gray;
+    position: relative; /* para poder estilizar a su hijo */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.card_contenido::after{
+    content:""; /* cuando no se quiere colocar texto sino utilizarlo como un elemento gráfico */
+    display: block; /* porque por default es inline*/
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: gray;
+    position: absolute;
+    left:-6px;
+    bottom: -6px;
+}
+.card_contenido p{
+    color: gray;
+    font-size: 1.1em;
+    letter-spacing: 0.01em;
+}
+.card:not(:first-child){
+    margin-top: 30px;
+}
+.card_boton{
+    display: block;
+    padding: 10px 15px;
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+    background-image: linear-gradient(to right top, #114ed1, rgb(28, 174, 22));
+}
+@media screen and (min-width:501px){
+    .articulos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* solo funciona bien cuando todas las filas tienen el mismo número de elementos, porque genera espacio intermedio vacío (por ejemplo 3 columnas y la última solo 2)*/
+    }
+    .card{
+        width:48%;
+        margin-bottom: 4%; /* como no existe una altura determinada, entonces el % se calcula sobre el ancho */
+    }
+    .card:not(:first-child){
+        margin-top: 0;
+    }
+    /* cuando el display flex crea filas, cada una de ellas se convierte en un eje principal (usando flex-wrap: wrap) y, por lo tanto, al aplicar space between solo crea espacio entre los elementos dentro de ese eje y no respecto de la totalidad de elementos que se encuentran dentro del contenedor */
+}
+@media screen and (min-width:901px){
+    .articulos{
+        justify-content: flex-start;
+    }   
+    .card{
+        width:32%;
+        margin-bottom: 2%; /* como no existe una altura determinada, entonces el % se calcula sobre el ancho */
+    }
+    .card:nth-child(3n+2){
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+@media screen and (min-width:1201px){
+    .articulos{
+        width: 1200px;
+    }
+
+}
